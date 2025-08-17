@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.order.adapter.out.persistence.mapper.CartMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="BaseResultMap" type="com.mall.order.adapter.out.persistence.entity.CartJpaEntity">
+        <id column="cart_id" property="cartId" />
+        <result column="member_id" property="memberId" />
+        <result column="goods_id" property="goodsId" />
+        <result column="common_id" property="commonId" />
+        <result column="buy_num" property="buyNum" />
+        <result column="bundling_id" property="bundlingId" />
+        <result column="distribution_orders_id" property="distributionOrdersId" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 基础列 -->
+    <sql id="Base_Column_List">
+        cart_id, member_id, goods_id, common_id, buy_num, bundling_id,
+        distribution_orders_id, created_at, updated_at, is_deleted
+    </sql>
+
+    <!-- 根据会员ID查询购物车列表 -->
+    <select id="findByMemberId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM cart
+        WHERE member_id = #{memberId}
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 根据会员ID和商品ID查询购物车项 -->
+    <select id="findByMemberIdAndGoodsId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM cart
+        WHERE member_id = #{memberId}
+        AND goods_id = #{goodsId}
+        AND is_deleted = 0
+        LIMIT 1
+    </select>
+
+    <!-- 根据会员ID删除购物车项 -->
+    <update id="deleteByMemberId">
+        UPDATE cart
+        SET is_deleted = 1, updated_at = NOW()
+        WHERE member_id = #{memberId}
+        AND is_deleted = 0
+    </update>
+
+</mapper>

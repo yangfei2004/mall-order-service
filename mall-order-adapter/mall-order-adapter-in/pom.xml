@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.mall</groupId>
+        <artifactId>mall-order-adapter</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mall-order-adapter-in</artifactId>
+    <name>mall-order-adapter-in</name>
+    <description>order Service Inbound Adapters</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>mall-order-adapter-in-web</module>
+        <module>mall-order-adapter-in-feign</module>
+    </modules>
+
+    <dependencies>
+        <!-- Application Layer -->
+        <dependency>
+            <groupId>com.mall</groupId>
+            <artifactId>mall-order-application</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- 移除Common Module（已通过应用层传递） -->
+    </dependencies>
+</project>

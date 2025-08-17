@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: mall-order-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+        file-extension: yaml
+        shared-configs:
+          - data-id: common.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/mall_order?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+      idle-timeout: 30000
+      max-lifetime: 60000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+seata:
+  tx-service-group: mall_order_tx_group
+  service:
+    vgroup-mapping:
+      mall_order_tx_group: default
+    grouplist:
+      default: 127.0.0.1:8091
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: dev
+      group: SEATA_GROUP
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: dev
+      group: SEATA_GROUP
+
+server:
+  port: 18083
+  servlet:
+    context-path: /order
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: info
+    com.mall.order: debug
+  file:
+    name: logs/mall-order-service.log

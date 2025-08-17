@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.order.adapter.out.persistence.mapper.OrderGoodsMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="BaseResultMap" type="com.mall.order.adapter.out.persistence.entity.OrderGoodsJpaEntity">
+        <id column="order_goods_id" property="orderGoodsId" />
+        <result column="orders_id" property="ordersId" />
+        <result column="goods_id" property="goodsId" />
+        <result column="common_id" property="commonId" />
+        <result column="goods_name" property="goodsName" />
+        <result column="goods_image" property="goodsImage" />
+        <result column="goods_price" property="goodsPrice" />
+        <result column="buy_num" property="buyNum" />
+        <result column="goods_full_specs" property="goodsFullSpecs" />
+        <result column="category_id" property="categoryId" />
+        <result column="store_id" property="storeId" />
+        <result column="goods_serial" property="goodsSerial" />
+        <result column="unit_name" property="unitName" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 基础列 -->
+    <sql id="Base_Column_List">
+        order_goods_id, orders_id, goods_id, common_id, goods_name, goods_image,
+        goods_price, buy_num, goods_full_specs, category_id, store_id,
+        goods_serial, unit_name, created_at, updated_at, is_deleted
+    </sql>
+
+    <!-- 根据订单ID查询订单商品列表 -->
+    <select id="findByOrdersId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM orders_goods
+        WHERE orders_id = #{ordersId}
+        AND is_deleted = 0
+        ORDER BY order_goods_id ASC
+    </select>
+
+    <!-- 根据商品ID查询订单商品列表 -->
+    <select id="findByGoodsId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM orders_goods
+        WHERE goods_id = #{goodsId}
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 根据店铺ID查询订单商品列表 -->
+    <select id="findByStoreId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM orders_goods
+        WHERE store_id = #{storeId}
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+    </select>
+
+</mapper>

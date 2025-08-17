@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.order.adapter.out.persistence.mapper.OrderMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="BaseResultMap" type="com.mall.order.adapter.out.persistence.entity.OrderJpaEntity">
+        <id column="orders_id" property="ordersId" />
+        <result column="orders_sn" property="ordersSn" />
+        <result column="member_id" property="memberId" />
+        <result column="member_name" property="memberName" />
+        <result column="orders_state" property="ordersState" />
+        <result column="orders_type" property="ordersType" />
+        <result column="orders_amount" property="ordersAmount" />
+        <result column="final_amount" property="finalAmount" />
+        <result column="payment_state" property="paymentState" />
+        <result column="payment_code" property="paymentCode" />
+        <result column="receiver_name" property="receiverName" />
+        <result column="receiver_phone" property="receiverPhone" />
+        <result column="receiver_address" property="receiverAddress" />
+        <result column="receiver_area_info" property="receiverAreaInfo" />
+        <result column="receiver_message" property="receiverMessage" />
+        <result column="ship_code" property="shipCode" />
+        <result column="ship_name" property="shipName" />
+        <result column="ship_sn" property="shipSn" />
+        <result column="orders_note" property="ordersNote" />
+        <result column="create_time" property="createTime" />
+        <result column="payment_time" property="paymentTime" />
+        <result column="finish_time" property="finishTime" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 基础列 -->
+    <sql id="Base_Column_List">
+        orders_id, orders_sn, member_id, member_name, orders_state, orders_type,
+        orders_amount, final_amount, payment_state, payment_code, receiver_name,
+        receiver_phone, receiver_address, receiver_area_info, receiver_message,
+        ship_code, ship_name, ship_sn, orders_note, create_time, payment_time,
+        finish_time, created_at, updated_at, is_deleted
+    </sql>
+
+    <!-- 根据会员ID查询订单列表 -->
+    <select id="findByMemberId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM orders
+        WHERE member_id = #{memberId}
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 根据订单号查询订单 -->
+    <select id="findByOrdersSn" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM orders
+        WHERE orders_sn = #{ordersSn}
+        AND is_deleted = 0
+        LIMIT 1
+    </select>
+
+    <!-- 根据订单状态查询订单列表 -->
+    <select id="findByOrdersState" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM orders
+        WHERE orders_state = #{ordersState}
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 根据店铺ID查询订单列表 -->
+    <select id="findByStoreId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM orders
+        WHERE orders_id IN (
+            SELECT DISTINCT og.orders_id
+            FROM orders_goods og
+            WHERE og.store_id = #{storeId}
+            AND og.is_deleted = 0
+        )
+        AND is_deleted = 0
+        ORDER BY created_at DESC
+    </select>
+
+</mapper>

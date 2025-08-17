@@ -1,0 +1,125 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.mall:mall-order-bootstrap:jar:0.0.1-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.springframework.boot:spring-boot-maven-plugin is missing. @ line 67, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] mall-order-service                                                 [pom]
+[INFO] mall-order-common                                                  [jar]
+[INFO] mall-order-domain                                                  [jar]
+[INFO] mall-order-application                                             [jar]
+[INFO] mall-order-adapter                                                 [pom]
+[INFO] mall-order-adapter-in                                              [pom]
+[INFO] mall-order-adapter-in-web                                          [jar]
+[INFO] mall-order-adapter-in-feign                                        [jar]
+[INFO] mall-order-adapter-out                                             [pom]
+[INFO] mall-order-adapter-out-persistence                                 [jar]
+[INFO] mall-order-adapter-out-client                                      [jar]
+[INFO] mall-order-bootstrap                                               [jar]
+[INFO] 
+[INFO] --------------------< com.mall:mall-order-service >---------------------
+[INFO] Building mall-order-service 0.0.1-SNAPSHOT                        [1/12]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ---------------------< com.mall:mall-order-common >---------------------
+[INFO] Building mall-order-common 0.0.1-SNAPSHOT                         [2/12]
+[INFO]   from mall-order-common/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ mall-order-common ---
+[INFO] skip non existing resourceDirectory /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-common/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.8.1:compile (default-compile) @ mall-order-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files to /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-common/target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ mall-order-common ---
+[INFO] skip non existing resourceDirectory /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-common/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ mall-order-common ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ mall-order-common ---
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ mall-order-common ---
+[INFO] Building jar: /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-common/target/mall-order-common-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------------< com.mall:mall-order-domain >---------------------
+[INFO] Building mall-order-domain 0.0.1-SNAPSHOT                         [3/12]
+[INFO]   from mall-order-domain/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ mall-order-domain ---
+[INFO] skip non existing resourceDirectory /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.8.1:compile (default-compile) @ mall-order-domain ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/java/com/mall/order/domain/model/order/Order.java:[150,45] 找不到符号
+  符号:   变量 ORDER_CANNOT_PAY
+  位置: 类 com.mall.order.common.enums.Resp
+[ERROR] /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/java/com/mall/order/domain/model/order/Order.java:[168,45] 找不到符号
+  符号:   变量 ORDER_CANNOT_SHIP
+  位置: 类 com.mall.order.common.enums.Resp
+[ERROR] /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/java/com/mall/order/domain/model/order/Order.java:[187,45] 找不到符号
+  符号:   变量 ORDER_CANNOT_RECEIVE
+  位置: 类 com.mall.order.common.enums.Resp
+[ERROR] /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/java/com/mall/order/domain/model/order/Order.java:[204,45] 找不到符号
+  符号:   变量 ORDER_CANNOT_CANCEL
+  位置: 类 com.mall.order.common.enums.Resp
+[INFO] 4 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for mall-order-service 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] mall-order-service ................................. SUCCESS [  0.001 s]
+[INFO] mall-order-common .................................. SUCCESS [  1.257 s]
+[INFO] mall-order-domain .................................. FAILURE [  0.531 s]
+[INFO] mall-order-application ............................. SKIPPED
+[INFO] mall-order-adapter ................................. SKIPPED
+[INFO] mall-order-adapter-in .............................. SKIPPED
+[INFO] mall-order-adapter-in-web .......................... SKIPPED
+[INFO] mall-order-adapter-in-feign ........................ SKIPPED
+[INFO] mall-order-adapter-out ............................. SKIPPED
+[INFO] mall-order-adapter-out-persistence ................. SKIPPED
+[INFO] mall-order-adapter-out-client ...................... SKIPPED
+[INFO] mall-order-bootstrap ............................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.969 s
+[INFO] Finished at: 2025-08-08T12:24:16+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project mall-order-domain: Compilation failure: Compilation failure: 
+[ERROR] /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/java/com/mall/order/domain/model/order/Order.java:[150,45] 找不到符号
+[ERROR]   符号:   变量 ORDER_CANNOT_PAY
+[ERROR]   位置: 类 com.mall.order.common.enums.Resp
+[ERROR] /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/java/com/mall/order/domain/model/order/Order.java:[168,45] 找不到符号
+[ERROR]   符号:   变量 ORDER_CANNOT_SHIP
+[ERROR]   位置: 类 com.mall.order.common.enums.Resp
+[ERROR] /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/java/com/mall/order/domain/model/order/Order.java:[187,45] 找不到符号
+[ERROR]   符号:   变量 ORDER_CANNOT_RECEIVE
+[ERROR]   位置: 类 com.mall.order.common.enums.Resp
+[ERROR] /Users/wuyunbin/IdeaProjects/mall/mall-order-service/mall-order-domain/src/main/java/com/mall/order/domain/model/order/Order.java:[204,45] 找不到符号
+[ERROR]   符号:   变量 ORDER_CANNOT_CANCEL
+[ERROR]   位置: 类 com.mall.order.common.enums.Resp
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :mall-order-domain
