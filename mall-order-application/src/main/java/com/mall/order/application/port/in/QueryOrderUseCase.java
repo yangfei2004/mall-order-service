@@ -10,24 +10,9 @@ import java.util.List;
  */
 public interface QueryOrderUseCase {
     
-    /**
-     * 根据ID查询订单
-     * @param orderId 订单ID
-     * @return 订单响应
-     */
-    OrderResponse getOrderById(Long orderId);
+
     
-    /**
-     * 根据订单号查询订单
-     * @param ordersSn 订单号
-     * @return 订单响应
-     */
-    OrderResponse getOrderByOrdersSn(Long ordersSn);
+
     
-    /**
-     * 查询用户订单列表
-     * @param query 查询条件
-     * @return 订单列表
-     */
-    List<OrderResponse> getUserOrders(OrderQuery query);
+
 }
