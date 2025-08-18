@@ -7,7 +7,8 @@ import com.mall.order.application.dto.OrderResponse;
  * 创建订单用例
  */
 public interface CreateOrderUseCase {
-    
+
+
     /**
      * 创建订单
      * @param command 创建订单命令
