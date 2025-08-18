@@ -5,6 +5,7 @@ import com.mall.order.application.dto.OrderResponse;
 public interface GetOrderByOrderSnCase {
     /**
      * 根据订单号查询订单
+     * @author yangfei
      * @param ordersSn 订单号
      * @return 订单响应
      */

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * 购物车用例接口
+ * @author yangfei
  */
 public interface CartUseCase {
 
