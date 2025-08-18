@@ -6,6 +6,7 @@ public interface CartUpdateCase {
 
     /**
      * 更新购物车商品数量
+     * @author yangfei
      */
     void updateCart(UpdateCartCommand command);
 }
