@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GetOrderByOrderSnCaseService implements GetOrderByOrderSnCase {
 
+
     private final OrderRepository orderRepository;
 
     @Override
