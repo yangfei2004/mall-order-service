@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class CartClearService implements CartClearCase {
 
-
     private final CartRepository CartRepository;
 
     @Override
