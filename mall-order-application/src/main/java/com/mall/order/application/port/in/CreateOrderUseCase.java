@@ -4,6 +4,7 @@ import com.mall.order.application.command.CreateOrderCommand;
 import com.mall.order.application.dto.OrderResponse;
 
 /**
+ *
  * 创建订单用例
  */
 public interface CreateOrderUseCase {
