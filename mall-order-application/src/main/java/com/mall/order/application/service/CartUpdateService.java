@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CartUpdateService implements CartUpdateCase {
 
-
     private final CartRepository cartRepository;
 
     @Override

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CartRemoveService implements CartRemoveCase {
 
-
     private final CartRepository cartRepository;
 
     @Override

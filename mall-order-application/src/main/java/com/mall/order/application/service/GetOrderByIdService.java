@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GetOrderByIdService implements GetOrderByIdCase {
-
     private final OrderRepository orderRepository;
 
     @Override
