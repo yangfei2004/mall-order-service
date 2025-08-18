@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface GetCartByMemberIdCase {
     /**
+     *
      * 查询会员购物车
      * @author yangfei
      */
