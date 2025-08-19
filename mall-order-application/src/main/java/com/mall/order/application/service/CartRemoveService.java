@@ -4,6 +4,7 @@ import com.mall.order.application.port.in.CartRemoveCase;
 import com.mall.order.application.port.out.CartRepository;
 import com.mall.order.common.enums.Resp;
 import com.mall.order.common.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 /**
@@ -11,9 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
  * @author yangfei
  */
 @Service
+@Slf4j
 public class CartRemoveService implements CartRemoveCase {
 
     private final CartRepository cartRepository;
+
+    public CartRemoveService(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
 
     @Override
     @Transactional

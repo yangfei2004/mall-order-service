@@ -6,6 +6,7 @@ import com.mall.order.application.port.out.OrderRepository;
 import com.mall.order.common.enums.Resp;
 import com.mall.order.common.exception.BusinessException;
 import com.mall.order.domain.model.order.Order;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 /**
@@ -18,15 +19,21 @@ public class GetOrderByOrderSnCaseService implements GetOrderByOrderSnCase {
 
     private final OrderRepository orderRepository;
 
+    @Resource
+    private OrderConvertToResponseService orderConvertToResponseService;
+
+    public GetOrderByOrderSnCaseService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
 
     @Override
     public OrderResponse getOrderByOrdersSn(Long ordersSn) {
-        log.info("根据订单号查询订单: orderSn={}", orderSn);
+        log.info("根据订单号查询订单: orderSn={}",ordersSn);
 
-        Order order = orderRepository.findByOrdersSn(orderSn)
+        Order order = orderRepository.findByOrdersSn(ordersSn)
                 .orElseThrow(() -> new BusinessException(Resp.ORDER_NOT_FOUND));
 
-        return convertToResponse(order);
+        return orderConvertToResponseService.convertToResponse(order);
     }
 }

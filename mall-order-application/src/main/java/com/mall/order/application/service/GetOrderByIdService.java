@@ -6,14 +6,25 @@ import com.mall.order.application.port.out.OrderRepository;
 import com.mall.order.common.enums.Resp;
 import com.mall.order.common.exception.BusinessException;
 import com.mall.order.domain.model.order.Order;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 /**
  *
  * @author yangfei
  */
+@Slf4j
 @Service
 public class GetOrderByIdService implements GetOrderByIdCase {
     private final OrderRepository orderRepository;
+
+    @Resource
+    private OrderConvertToResponseService orderConvertToResponseService;
+
+    public GetOrderByIdService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Override
     public OrderResponse getOrderById(Long orderId) {
@@ -22,6 +33,8 @@ public class GetOrderByIdService implements GetOrderByIdCase {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new BusinessException(Resp.ORDER_NOT_FOUND));
 
-        return convertToResponse(order);
+        return orderConvertToResponseService.convertToResponse(order);
     }
+
+
 }

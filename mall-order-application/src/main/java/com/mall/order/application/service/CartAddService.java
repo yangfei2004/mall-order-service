@@ -20,6 +20,11 @@ public class CartAddService implements CartAddCase {
 
     private final CartRepository cartRepository;
 
+    public CartAddService(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
+
+
     @Override
     @Transactional
     public void addToCart(AddToCartCommand command) {

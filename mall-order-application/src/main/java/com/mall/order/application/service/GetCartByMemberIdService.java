@@ -17,11 +17,31 @@ public class GetCartByMemberIdService implements GetCartByMemberIdCase {
 
     private final CartRepository cartRepository;
 
+    public GetCartByMemberIdService(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
+
     @Override
     public List<CartResponse> getCartByMemberId(Integer memberId) {
         List<Cart> carts = cartRepository.findByMemberId(memberId);
         return carts.stream()
                 .map(this::convertToResponse)
                 .collect(Collectors.toList());
+    }
+    /**
+     * 转换为响应对象
+     */
+    private CartResponse convertToResponse(Cart cart) {
+        CartResponse response = new CartResponse();
+        response.setCartId(cart.getCartId());
+        response.setMemberId(cart.getMemberId());
+        response.setGoodsId(cart.getGoodsId());
+        response.setCommonId(cart.getCommonId());
+        response.setBuyNum(cart.getBuyNum());
+        response.setBundlingId(cart.getBundlingId());
+        response.setDistributionOrdersId(cart.getDistributionOrdersId());
+        response.setCreatedAt(cart.getCreatedAt());
+        response.setUpdatedAt(cart.getUpdatedAt());
+        return response;
     }
 }

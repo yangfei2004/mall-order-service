@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 /**
  * 订单仓储实现
+ * @author yangfei
  */
 @Repository
 @RequiredArgsConstructor
@@ -49,7 +50,13 @@ public class OrderRepositoryImpl implements OrderRepository {
         OrderJpaEntity entity = orderMapper.findByOrdersSn(ordersSn);
         return Optional.ofNullable(orderConverter.toDomainModel(entity));
     }
-    
+
+    @Override
+    public List<Order> findByMemberId(Integer memberId, Integer ordersState) {
+        return List.of();
+    }
+
+
     @Override
     public List<Order> findByMemberId(Integer memberId) {
         List<OrderJpaEntity> entities = orderMapper.findByMemberId(memberId);

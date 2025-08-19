@@ -26,6 +26,7 @@ public class OrderResponse {
     private BigDecimal preDepositAmount;
     private BigDecimal refundAmount;
     private String ordersFrom;
+    private Integer paymentState;
     private LocalDateTime createTime;
     private LocalDateTime paymentTime;
     private LocalDateTime sendTime;
