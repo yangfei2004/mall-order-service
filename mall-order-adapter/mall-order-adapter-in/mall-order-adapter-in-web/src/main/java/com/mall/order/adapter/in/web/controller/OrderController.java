@@ -2,9 +2,9 @@ package com.mall.order.adapter.in.web.controller;
 
 import com.mall.order.application.command.CreateOrderCommand;
 import com.mall.order.application.dto.OrderResponse;
-import com.mall.order.application.port.in.CreateOrderUseCase;
-import com.mall.order.application.port.in.QueryOrderUseCase;
+import com.mall.order.application.port.in.*;
 import com.mall.order.application.query.OrderQuery;
+import com.mall.order.application.service.QueryOrderService;
 import com.mall.order.common.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -29,7 +29,10 @@ import java.util.List;
 public class OrderController {
     
     private final CreateOrderUseCase createOrderUseCase;
-    private final QueryOrderUseCase queryOrderUseCase;
+    private final GetOrderByIdCase getOrderByIdCase;
+    private final GetOrdersByQueryCase getOrdersByQuery;
+    private final GetOrderByOrderSnCase getOrderByOrderSnCase;
+
     
     /**
      * 创建订单
@@ -51,7 +54,7 @@ public class OrderController {
     public Result<OrderResponse> getOrderById(
             @Parameter(description = "订单ID") @PathVariable Long orderId) {
         log.info("查询订单详情: orderId={}", orderId);
-        OrderResponse response = queryOrderUseCase.getOrderById(orderId);
+        OrderResponse response = getOrderByIdCase.getOrderById(orderId);
         return Result.success(response);
     }
     
@@ -74,7 +77,7 @@ public class OrderController {
         query.setPage(page);
         query.setSize(size);
         
-        List<OrderResponse> responses = queryOrderUseCase.getOrdersByQuery(query);
+        List<OrderResponse> responses = getOrdersByQuery.getOrdersByQuery(query);
         return Result.success(responses);
     }
     
@@ -86,7 +89,7 @@ public class OrderController {
     public Result<OrderResponse> getOrderByOrderSn(
             @Parameter(description = "订单号") @PathVariable Long orderSn) {
         log.info("根据订单号查询订单: orderSn={}", orderSn);
-        OrderResponse response = queryOrderUseCase.getOrderByOrderSn(orderSn);
+        OrderResponse response = getOrderByOrderSnCase.getOrderByOrdersSn(orderSn);
         return Result.success(response);
     }
     

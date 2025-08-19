@@ -24,65 +24,8 @@ public class QueryOrderService implements QueryOrderUseCase {
     
     private final OrderRepository orderRepository;
     
-    @Override
-    public OrderResponse getOrderById(Long orderId) {
-        log.info("根据ID查询订单: orderId={}", orderId);
-        
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new BusinessException(Resp.ORDER_NOT_FOUND));
-        
-        return convertToResponse(order);
-    }
 
 
-    @Override
-    public OrderResponse getOrderByOrderSn(Long orderSn) {
-        log.info("根据订单号查询订单: orderSn={}", orderSn);
-        
-        Order order = orderRepository.findByOrdersSn(orderSn)
-                .orElseThrow(() -> new BusinessException(Resp.ORDER_NOT_FOUND));
-        
-        return convertToResponse(order);
-    }
-    
-    @Override
-    public List<OrderResponse> getOrdersByQuery(OrderQuery query) {
-        log.info("根据查询条件查询订单列表: {}", query);
-        
-        List<Order> orders;
-        
-        if (query.getMemberId() != null) {
-            orders = orderRepository.findByMemberId(query.getMemberId());
-        } else if (query.getOrderState() != null) {
-            orders = orderRepository.findByOrdersState(query.getOrderState());
-        } else if (query.getStoreId() != null) {
-            orders = orderRepository.findByStoreId(query.getStoreId());
-        } else {
-            throw new BusinessException(Resp.INVALID_PARAM);
-        }
-        
-        // 根据订单状态过滤
-        if (query.getOrderState() != null && query.getMemberId() != null) {
-            orders = orders.stream()
-                    .filter(order -> query.getOrderState().equals(order.getOrdersState()))
-                    .collect(Collectors.toList());
-        }
-        
-        // 分页处理（简单实现，实际项目中建议使用MyBatis-Plus的分页插件）
-        if (query.getPage() != null && query.getSize() != null) {
-            int start = (query.getPage() - 1) * query.getSize();
-            int end = Math.min(start + query.getSize(), orders.size());
-            if (start < orders.size()) {
-                orders = orders.subList(start, end);
-            } else {
-                orders = List.of();
-            }
-        }
-        
-        return orders.stream()
-                .map(this::convertToResponse)
-                .collect(Collectors.toList());
-    }
     
     /**
      * 转换为响应对象
