@@ -6,12 +6,14 @@ import com.mall.order.application.port.out.CartRepository;
 import com.mall.order.common.enums.Resp;
 import com.mall.order.common.exception.BusinessException;
 import com.mall.order.domain.model.cart.Cart;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 /**
  *
  * @author yangfei
  */
+@Slf4j
 @Service
 public class CartUpdateService implements CartUpdateCase {
 
