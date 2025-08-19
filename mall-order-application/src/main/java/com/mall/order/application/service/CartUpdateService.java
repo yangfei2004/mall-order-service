@@ -19,6 +19,10 @@ public class CartUpdateService implements CartUpdateCase {
 
     private final CartRepository cartRepository;
 
+    public CartUpdateService(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
+
     @Override
     @Transactional
     public void updateCart(UpdateCartCommand command) {

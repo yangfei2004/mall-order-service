@@ -1,36 +1,20 @@
 package com.mall.order.application.service;
 
 import com.mall.order.application.dto.OrderResponse;
-import com.mall.order.application.port.in.QueryOrderUseCase;
-import com.mall.order.application.port.out.OrderRepository;
-import com.mall.order.application.query.OrderQuery;
-import com.mall.order.common.enums.Resp;
-import com.mall.order.common.exception.BusinessException;
 import com.mall.order.domain.model.order.Order;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.mall.order.domain.model.order.OrderGoods;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * 查询订单服务
- */
-@Slf4j
 @Service
-@RequiredArgsConstructor
-public class QueryOrderService implements QueryOrderUseCase {
-    
-    private final OrderRepository orderRepository;
-    
-
-
-    
+public class OrderConvertToResponseService {
     /**
      * 转换为响应对象
+     * @author yangfei
      */
-    private OrderResponse convertToResponse(Order order) {
+    public OrderResponse convertToResponse(Order order) {
         OrderResponse response = new OrderResponse();
         response.setOrdersId(order.getOrdersId());
         response.setOrdersSn(order.getOrdersSn());
@@ -40,7 +24,7 @@ public class QueryOrderService implements QueryOrderUseCase {
         response.setOrdersType(order.getOrdersType());
         response.setOrdersAmount(order.getOrdersAmount());
         response.setFinalAmount(order.getFinalAmount());
-        response.setPaymentState(order.getPaymentState());
+//        response.setPaymentState(order.getPaymentState());
         response.setPaymentCode(order.getPaymentCode());
         response.setReceiverName(order.getReceiverName());
         response.setReceiverPhone(order.getReceiverPhone());
@@ -54,7 +38,7 @@ public class QueryOrderService implements QueryOrderUseCase {
         response.setCreateTime(order.getCreateTime());
         response.setPaymentTime(order.getPaymentTime());
         response.setFinishTime(order.getFinishTime());
-        
+
         // 转换订单商品列表
         if (order.getOrderGoodsList() != null) {
             List<OrderResponse.OrderGoodsResponse> orderGoodsResponses = order.getOrderGoodsList().stream()
@@ -62,16 +46,17 @@ public class QueryOrderService implements QueryOrderUseCase {
                     .collect(Collectors.toList());
             response.setOrderGoodsList(orderGoodsResponses);
         }
-        
+
         return response;
     }
-    
+
     /**
      * 转换订单商品为响应对象
+     * @author yangfei
      */
-    private OrderResponse.OrderGoodsResponse convertOrderGoodsToResponse(com.mall.order.domain.model.order.OrderGoods orderGoods) {
+    public OrderResponse.OrderGoodsResponse convertOrderGoodsToResponse(OrderGoods orderGoods) {
         OrderResponse.OrderGoodsResponse response = new OrderResponse.OrderGoodsResponse();
-        response.setOrderGoodsId(orderGoods.getOrderGoodsId());
+        response.setOrdersGoodsId(orderGoods.getOrdersGoodsId());
         response.setGoodsId(orderGoods.getGoodsId());
         response.setGoodsName(orderGoods.getGoodsName());
         response.setGoodsImage(orderGoods.getGoodsImage());

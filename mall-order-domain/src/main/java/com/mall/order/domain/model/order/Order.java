@@ -147,7 +147,8 @@ public class Order {
      */
     public void pay(String paymentCode, String paymentTypeCode) {
         if (!OrderState.PENDING_PAYMENT.getCode().equals(this.ordersState)) {
-            throw new BusinessException(Resp.ORDER_CANNOT_PAY);
+//            throw new BusinessException(Resp.ORDER_CANNOT_PAY);
+            throw new BusinessException(Resp.ORDER_STATUS_ERROR);
         }
         
         Integer oldState = this.ordersState;
@@ -165,7 +166,8 @@ public class Order {
      */
     public void ship(String shipCode, String shipName, String shipSn) {
         if (!OrderState.PENDING_SHIPMENT.getCode().equals(this.ordersState)) {
-            throw new BusinessException(Resp.ORDER_CANNOT_SHIP);
+//            throw new BusinessException(Resp.ORDER_CANNOT_SHIP);
+            throw new BusinessException(Resp.ORDER_SHIP_FAILED);
         }
         
         Integer oldState = this.ordersState;
@@ -185,6 +187,7 @@ public class Order {
     public void receive() {
         if (!OrderState.PENDING_RECEIPT.getCode().equals(this.ordersState)) {
             throw new BusinessException(Resp.ORDER_CANNOT_RECEIVE);
+
         }
         
         Integer oldState = this.ordersState;
@@ -202,6 +205,7 @@ public class Order {
         if (OrderState.COMPLETED.getCode().equals(this.ordersState) || 
             OrderState.CANCELLED.getCode().equals(this.ordersState)) {
             throw new BusinessException(Resp.ORDER_CANNOT_CANCEL);
+
         }
         
         Integer oldState = this.ordersState;
@@ -247,5 +251,9 @@ public class Order {
         List<DomainEvent> events = new ArrayList<>(this.domainEvents);
         this.domainEvents.clear();
         return events;
+    }
+
+    public BigDecimal value(){
+        return this.ordersAmount;
     }
 }

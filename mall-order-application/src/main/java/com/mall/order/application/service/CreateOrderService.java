@@ -7,6 +7,7 @@ import com.mall.order.application.port.out.OrderRepository;
 import com.mall.order.common.util.OrderSnGenerator;
 import com.mall.order.domain.model.order.Order;
 import com.mall.order.domain.model.order.OrderGoods;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,15 +26,17 @@ public class CreateOrderService implements CreateOrderUseCase {
     
     private final OrderRepository orderRepository;
     private final OrderSnGenerator orderSnGenerator;
+
+
     
     @Override
     @Transactional
     public OrderResponse createOrder(CreateOrderCommand command) {
         log.info("开始创建订单，用户ID：{}", command.getMemberId());
-        
+
         // 生成订单号
         Long ordersSn = orderSnGenerator.generateOrderSn();
-        
+
         // 创建订单商品列表
         List<OrderGoods> orderGoodsList = command.getOrderGoodsList().stream()
                 .map(goodsCommand -> OrderGoods.create(
@@ -45,12 +48,12 @@ public class CreateOrderService implements CreateOrderUseCase {
                         goodsCommand.getBuyNum()
                 ))
                 .collect(Collectors.toList());
-        
+
         // 计算订单总金额
         java.math.BigDecimal totalAmount = orderGoodsList.stream()
                 .map(OrderGoods::getTotalAmount)
                 .reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add);
-        
+
         // 创建订单
         Order order = Order.create(
                 ordersSn,
@@ -62,7 +65,7 @@ public class CreateOrderService implements CreateOrderUseCase {
                 command.getReceiverAddress(),
                 orderGoodsList
         );
-        
+
         // 设置其他订单信息
         order.setReceiverAreaInfo(command.getReceiverAreaInfo());
         order.setReceiverMessage(command.getReceiverMessage());
@@ -71,19 +74,18 @@ public class CreateOrderService implements CreateOrderUseCase {
         order.setInvoiceTitle(command.getInvoiceTitle());
         order.setInvoiceContent(command.getInvoiceContent());
         order.setOrdersNote(command.getOrdersNote());
-        
+
         // 重新计算最终金额
         order.calculateAmount();
-        
+
         // 保存订单
         Order savedOrder = orderRepository.save(order);
-        
+
         log.info("订单创建成功，订单号：{}", savedOrder.getOrdersSn());
-        
+
         // 转换为响应DTO
         return convertToResponse(savedOrder);
     }
-    
     private OrderResponse convertToResponse(Order order) {
         OrderResponse response = new OrderResponse();
         response.setOrdersId(order.getOrdersId());
@@ -122,7 +124,7 @@ public class CreateOrderService implements CreateOrderUseCase {
         response.setInvoiceTitle(order.getInvoiceTitle());
         response.setInvoiceContent(order.getInvoiceContent());
         response.setInvoiceCode(order.getInvoiceCode());
-        
+
         // 转换订单商品列表
         if (order.getOrderGoodsList() != null) {
             List<OrderResponse.OrderGoodsResponse> goodsResponseList = order.getOrderGoodsList().stream()
@@ -130,10 +132,10 @@ public class CreateOrderService implements CreateOrderUseCase {
                     .collect(Collectors.toList());
             response.setOrderGoodsList(goodsResponseList);
         }
-        
+
         return response;
     }
-    
+
     private OrderResponse.OrderGoodsResponse convertToGoodsResponse(OrderGoods orderGoods) {
         OrderResponse.OrderGoodsResponse response = new OrderResponse.OrderGoodsResponse();
         response.setOrdersGoodsId(orderGoods.getOrdersGoodsId());
@@ -152,4 +154,5 @@ public class CreateOrderService implements CreateOrderUseCase {
         response.setRefundPrice(orderGoods.getRefundPrice());
         return response;
     }
+
 }

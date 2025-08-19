@@ -1,6 +1,7 @@
 package com.mall.order.application.port.out;
 
 import com.mall.order.domain.model.order.Order;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import java.util.Optional;
 /**
  * 订单仓储接口
  */
+@Repository
 public interface OrderRepository {
     
     /**
@@ -38,10 +40,15 @@ public interface OrderRepository {
      * @return 订单列表
      */
     List<Order> findByMemberId(Integer memberId, Integer ordersState);
-    
+
+    List<Order> findByMemberId(Integer memberId);
+
     /**
      * 删除订单
      * @param orderId 订单ID
      */
     void deleteById(Long orderId);
+    List<Order> findByOrdersState(Integer ordersState);
+    public List<Order> findByStoreId(Integer storeId);
+    public boolean existsByOrdersSn(Long ordersSn);
 }

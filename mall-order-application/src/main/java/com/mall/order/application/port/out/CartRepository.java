@@ -1,6 +1,7 @@
 package com.mall.order.application.port.out;
 
 import com.mall.order.domain.model.cart.Cart;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import java.util.Optional;
 /**
  * 购物车仓储接口
  */
+@Repository
 public interface CartRepository {
     
     /**

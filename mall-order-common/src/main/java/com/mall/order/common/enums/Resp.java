@@ -35,6 +35,8 @@ public enum Resp {
     ORDER_FINISH_FAILED("ORDER01008", "订单完成失败"),
     ORDER_GOODS_NOT_FOUND("ORDER01009", "订单商品不存在"),
     ORDER_GOODS_AMOUNT_ERROR("ORDER01010", "订单商品金额错误"),
+    ORDER_CANNOT_RECEIVE("ORDER01011", "订单不能确认收货"),
+    ORDER_CANNOT_CANCEL("ORDER01012", "订单不能取消"),
     
     // 购物车相关
     CART_ITEM_NOT_FOUND("ORDER02000", "购物车商品不存在"),
