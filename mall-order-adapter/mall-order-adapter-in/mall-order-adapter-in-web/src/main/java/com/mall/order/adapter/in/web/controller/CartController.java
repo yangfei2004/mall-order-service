@@ -3,7 +3,7 @@ package com.mall.order.adapter.in.web.controller;
 import com.mall.order.application.command.AddToCartCommand;
 import com.mall.order.application.command.UpdateCartCommand;
 import com.mall.order.application.dto.CartResponse;
-import com.mall.order.application.port.in.CartUseCase;
+import com.mall.order.application.port.in.*;
 import com.mall.order.common.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -27,7 +27,11 @@ import java.util.List;
 @Tag(name = "购物车管理", description = "购物车相关接口")
 public class CartController {
     
-    private final CartUseCase cartUseCase;
+   private final CartAddCase cartAddCase;
+   private final GetCartByMemberIdCase getCartByMemberIdCase;
+   private final CartUpdateCase cartUpdateCase;
+   private final CartRemoveCase cartRemoveCase;
+   private final CartClearCase cartClearCase;
     
     /**
      * 添加商品到购物车
@@ -36,7 +40,7 @@ public class CartController {
     @Operation(summary = "添加商品到购物车", description = "将商品添加到购物车")
     public Result<Void> addToCart(@Valid @RequestBody AddToCartCommand command) {
         log.info("添加商品到购物车: {}", command);
-        cartUseCase.addToCart(command);
+        cartAddCase.addToCart(command);
         return Result.success();
     }
     
@@ -48,7 +52,7 @@ public class CartController {
     public Result<List<CartResponse>> getCartByMemberId(
             @Parameter(description = "会员ID") @PathVariable Integer memberId) {
         log.info("查询购物车列表: memberId={}", memberId);
-        List<CartResponse> responses = cartUseCase.getCartByMemberId(memberId);
+        List<CartResponse> responses = getCartByMemberIdCase.getCartByMemberId(memberId);
         return Result.success(responses);
     }
     
@@ -65,8 +69,8 @@ public class CartController {
         UpdateCartCommand command = new UpdateCartCommand();
         command.setCartId(cartId);
         command.setBuyNum(quantity);
-        
-        cartUseCase.updateCart(command);
+
+        cartUpdateCase.updateCart(command);
         return Result.success();
     }
     
@@ -78,7 +82,7 @@ public class CartController {
     public Result<Void> removeFromCart(
             @Parameter(description = "购物车ID") @PathVariable Long cartId) {
         log.info("删除购物车商品: cartId={}", cartId);
-        cartUseCase.removeFromCart(cartId);
+        cartRemoveCase.removeFromCart(cartId);
         return Result.success();
     }
     
@@ -90,7 +94,7 @@ public class CartController {
     public Result<Void> clearCart(
             @Parameter(description = "会员ID") @PathVariable Integer memberId) {
         log.info("清空购物车: memberId={}", memberId);
-        cartUseCase.clearCart(memberId);
+        cartClearCase.clearCart(memberId);
         return Result.success();
     }
 }
