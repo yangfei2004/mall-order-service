@@ -39,7 +39,7 @@ CREATE TABLE `cart`
     PRIMARY KEY (`cart_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 829
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `cart_bundling`
     `is_deleted`       tinyint  DEFAULT '0',
     PRIMARY KEY (`cart_bundling_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `complain`
     PRIMARY KEY (`complain_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `complain_subject`
     PRIMARY KEY (`subject_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 7
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +162,7 @@ CREATE TABLE `complain_talk`
     `is_deleted`    tinyint  DEFAULT '0',
     PRIMARY KEY (`talk_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `invoice`
     PRIMARY KEY (`invoice_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +278,7 @@ CREATE TABLE `orders`
     PRIMARY KEY (`orders_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3400
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,7 +317,7 @@ CREATE TABLE `orders_book`
     `is_deleted`          tinyint        DEFAULT '0',
     PRIMARY KEY (`book_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +351,7 @@ CREATE TABLE `orders_gift`
     `is_deleted`       tinyint      DEFAULT '0',
     PRIMARY KEY (`orders_gift_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -404,7 +404,7 @@ CREATE TABLE `orders_goods`
     PRIMARY KEY (`orders_goods_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3829
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -430,7 +430,7 @@ CREATE TABLE `orders_pay`
     PRIMARY KEY (`pay_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3400
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -454,7 +454,7 @@ CREATE TABLE `orders_seckill`
     PRIMARY KEY (`orders_seckill_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 48
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -481,7 +481,7 @@ CREATE TABLE `payment`
     PRIMARY KEY (`payment_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 8
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -547,7 +547,7 @@ CREATE TABLE `refund`
     PRIMARY KEY (`refund_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 157
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,7 +579,7 @@ CREATE TABLE `refund_book`
     `is_deleted`          tinyint        DEFAULT '0',
     PRIMARY KEY (`refund_book_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -610,7 +610,7 @@ CREATE TABLE `refund_detail`
     PRIMARY KEY (`refund_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 157
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -634,7 +634,7 @@ CREATE TABLE `refund_reason`
     PRIMARY KEY (`reason_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 10
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -679,7 +679,7 @@ CREATE TABLE `refund_virtual`
     `is_deleted`       tinyint        DEFAULT '0',
     PRIMARY KEY (`refund_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -715,7 +715,7 @@ CREATE TABLE `refund_virtual_code`
     `is_deleted`      tinyint        DEFAULT '0',
     PRIMARY KEY (`refund_code_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -742,7 +742,7 @@ CREATE TABLE `ship_company`
     PRIMARY KEY (`ship_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 48
-  DEFAULT CHARSET = utf8mb3;
+  DEFAULT CHARSET = utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
 
