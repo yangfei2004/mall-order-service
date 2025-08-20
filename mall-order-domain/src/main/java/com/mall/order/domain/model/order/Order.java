@@ -26,12 +26,12 @@ public class Order {
     private String memberName;
     private Integer ordersState;
     private Integer ordersType;
-    private BigDecimal ordersAmount;
+    private OrdersAmount ordersAmount;
     private BigDecimal finalAmount;
-    private BigDecimal freightAmount;
-    private BigDecimal couponAmount;
-    private BigDecimal preDepositAmount;
-    private BigDecimal refundAmount;
+    private FreightAmount freightAmount;
+    private CouponAmount couponAmount;
+    private PreDepositAmount preDepositAmount;
+    private RefundAmount refundAmount;
     private String ordersFrom;
     private LocalDateTime createTime;
     private LocalDateTime paymentTime;
@@ -115,14 +115,14 @@ public class Order {
      * 创建订单
      */
     public static Order create(Long ordersSn, Integer memberId, String memberName, 
-                              BigDecimal ordersAmount, String receiverName, String receiverPhone, 
+                              OrdersAmount ordersAmount, String receiverName, String receiverPhone,
                               String receiverAddress, List<OrderGoods> orderGoodsList) {
         Order order = new Order();
         order.ordersSn = ordersSn;
         order.memberId = memberId;
         order.memberName = memberName;
         order.ordersAmount = ordersAmount;
-        order.finalAmount = ordersAmount;
+        order.finalAmount = ordersAmount.toFinalAmount().finalAmount();
         order.ordersState = OrderState.PENDING_PAYMENT.getCode();
         order.ordersType = 1; // 普通订单
         order.receiverName = receiverName;
@@ -137,7 +137,7 @@ public class Order {
         order.orderGoodsList = orderGoodsList != null ? orderGoodsList : new ArrayList<>();
         
         // 发布订单创建事件
-        order.addDomainEvent(new OrderCreatedEvent(order.ordersSn, order.memberId, order.ordersAmount));
+        order.addDomainEvent(new OrderCreatedEvent(order.ordersSn, order.memberId, order.ordersAmount.getValue()));
         
         return order;
     }
@@ -226,11 +226,11 @@ public class Order {
                 .map(goods -> goods.getGoodsPrice().multiply(BigDecimal.valueOf(goods.getBuyNum())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         
-        this.ordersAmount = goodsAmount;
+        this.ordersAmount = new OrdersAmount(goodsAmount);
         this.finalAmount = goodsAmount
-                .add(freightAmount != null ? freightAmount : BigDecimal.ZERO)
-                .subtract(couponAmount != null ? couponAmount : BigDecimal.ZERO)
-                .subtract(preDepositAmount != null ? preDepositAmount : BigDecimal.ZERO);
+                .add(freightAmount != null ? freightAmount.getValue() : BigDecimal.ZERO)
+                .subtract(couponAmount != null ? couponAmount.getValue() : BigDecimal.ZERO)
+                .subtract(preDepositAmount != null ? preDepositAmount.getValue() : BigDecimal.ZERO);
         
         if (this.finalAmount.compareTo(BigDecimal.ZERO) < 0) {
             this.finalAmount = BigDecimal.ZERO;
@@ -253,7 +253,7 @@ public class Order {
         return events;
     }
 
-    public BigDecimal value(){
+    public OrdersAmount value(){
         return this.ordersAmount;
     }
 }

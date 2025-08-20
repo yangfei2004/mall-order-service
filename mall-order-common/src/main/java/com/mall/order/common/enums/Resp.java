@@ -37,6 +37,9 @@ public enum Resp {
     ORDER_GOODS_AMOUNT_ERROR("ORDER01010", "订单商品金额错误"),
     ORDER_CANNOT_RECEIVE("ORDER01011", "订单不能确认收货"),
     ORDER_CANNOT_CANCEL("ORDER01012", "订单不能取消"),
+    ORDER_FREIGHT_AMOUNT_ERROR("ORDER01013", "订单运费金额错误"),
+    ORDER_COUPON_AMOUNT_ERROR("ORDER01014", "订单优惠券金额错误"),
+    ORDER_PRE_DEPOSIT_AMOUNT_ERROR("ORDER01015", "订单预存款金额错误"),
     
     // 购物车相关
     CART_ITEM_NOT_FOUND("ORDER02000", "购物车商品不存在"),
