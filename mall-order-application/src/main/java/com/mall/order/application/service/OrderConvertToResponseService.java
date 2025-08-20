@@ -26,7 +26,7 @@ public class OrderConvertToResponseService {
         response.setOrdersType(order.getOrdersType());
         response.setOrdersAmount(order.getOrdersAmount());
         response.setFinalAmount(order.getFinalAmount());
-//        response.setPaymentState(order.getPaymentState());
+        response.setPaymentState(order.getOrdersState());
         response.setPaymentCode(order.getPaymentCode());
         response.setReceiverName(order.getReceiverName());
         response.setReceiverPhone(order.getReceiverPhone());

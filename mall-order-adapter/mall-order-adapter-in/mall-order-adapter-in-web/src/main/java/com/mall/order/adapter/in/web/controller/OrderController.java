@@ -4,7 +4,6 @@ import com.mall.order.application.command.CreateOrderCommand;
 import com.mall.order.application.dto.OrderResponse;
 import com.mall.order.application.port.in.*;
 import com.mall.order.application.query.OrderQuery;
-import com.mall.order.application.service.QueryOrderService;
 import com.mall.order.common.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

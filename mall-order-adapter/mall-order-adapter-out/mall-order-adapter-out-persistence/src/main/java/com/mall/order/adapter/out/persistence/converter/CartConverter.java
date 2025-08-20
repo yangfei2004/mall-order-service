@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CartConverter {
-    
+
     /**
      * 领域对象转JPA实体
      */
@@ -17,7 +17,7 @@ public class CartConverter {
         if (cart == null) {
             return null;
         }
-        
+
         CartJpaEntity entity = new CartJpaEntity();
         entity.setCartId(cart.getCartId());
         entity.setMemberId(cart.getMemberId());
@@ -31,10 +31,10 @@ public class CartConverter {
         entity.setUpdatedAt(cart.getUpdatedAt());
         entity.setUpdatedBy(cart.getUpdatedBy());
         entity.setIsDeleted(cart.getIsDeleted());
-        
+
         return entity;
     }
-    
+
     /**
      * JPA实体转领域对象
      */
@@ -42,7 +42,7 @@ public class CartConverter {
         if (entity == null) {
             return null;
         }
-        
+
         Cart cart = new Cart();
         cart.setCartId(entity.getCartId());
         cart.setMemberId(entity.getMemberId());
@@ -51,4 +51,12 @@ public class CartConverter {
         cart.setBuyNum(entity.getBuyNum());
         cart.setBundlingId(entity.getBundlingId());
         cart.setDistributionOrdersId(entity.getDistributionOrdersId());
-        cart
+        cart.setCreatedAt(entity.getCreatedAt());
+        cart.setCreatedBy(entity.getCreatedBy());
+        cart.setUpdatedAt(entity.getUpdatedAt());
+        cart.setUpdatedBy(entity.getUpdatedBy());
+        cart.setIsDeleted(entity.getIsDeleted());
+
+        return cart;
+    }
+}
