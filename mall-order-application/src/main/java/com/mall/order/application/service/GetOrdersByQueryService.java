@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 @Service
 public class GetOrdersByQueryService implements GetOrdersByQueryCase {
     private final OrderRepository orderRepository;
+<<<<<<<< HEAD:mall-order-application/src/main/java/com/mall/order/application/service/GetOrdersByQueryService.java
 
     public GetOrdersByQueryService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -72,6 +73,12 @@ public class GetOrdersByQueryService implements GetOrdersByQueryCase {
                 .collect(Collectors.toList());
     }
 
+========
+    
+
+
+    
+>>>>>>>> c4a641c2a11658ae577aaae0566650f7c1c79a60:mall-order-application/src/main/java/com/mall/order/application/service/QueryOrderService.java
     /**
      * 转换为响应对象
      * @author yangfei
